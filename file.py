@@ -13,6 +13,7 @@ def greeter(func):
 
 def sums_of_str_elements_are_equal(func):
     def getSum(n):
+        negative = False
         if n<0:
             n=abs(n)
             negative=True
@@ -26,20 +27,20 @@ def sums_of_str_elements_are_equal(func):
         else:
             negative=False
             return sum
+    negative = False
+    def wrapper_func(*args, **kwargs):
+        # Do something before the function.
+        nonlocal negative
+        entry = [int(d) for d in re.findall(r'-?\d+', func(*args, **kwargs))]
+        if getSum(entry[0]) == getSum(entry[1]):
+            result=f'{getSum(entry[0])} == {getSum(entry[1])}'
+        else:
+            result=f'{getSum(entry[0])} != {getSum(entry[1])}'
 
-        def wrapper_func(*args, **kwargs):
-            # Do something before the function.
-            nonlocal negative
-            entry = [int(d) for d in re.findall(r'-?\d+', func(*args, **kwargs))]
-            if getSum(entry[0]) == getSum(entry[1]):
-                result=f'{getSum(entry[0])} == {getSum(entry[1])}'
-            else:
-                result=f'{getSum(entry[0])} != {getSum(entry[1])}'
 
-
-            return result
-            # Do something after the function.
-        return wrapper_func
+        return result
+        # Do something after the function.
+    return wrapper_func
 
 
 def format_output(*required_keys):
