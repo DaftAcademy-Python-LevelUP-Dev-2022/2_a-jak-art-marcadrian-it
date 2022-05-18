@@ -1,6 +1,6 @@
 def greeter(func):
 
-    def wrapper_func(*args):
+    def wrapper_func():
         # Do something before the function.
         
         result="Aloha "+func()
