@@ -1,5 +1,13 @@
 def greeter(func):
-    pass
+
+    def wrapper_func():
+        # Do something before the function.
+        
+        result="Aloha "+func()
+        
+        return result.title()
+        # Do something after the function.
+    return wrapper_func
 
 
 def sums_of_str_elements_are_equal(func):
