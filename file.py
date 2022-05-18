@@ -1,10 +1,11 @@
+import re
 def greeter(func):
 
-    def wrapper_func():
+    def wrapper_func(*args, **kwargs):
         # Do something before the function.
-        
-        result="Aloha "+func()
-        
+
+        result="Aloha "+func(*args, **kwargs)
+
         return result.title()
         # Do something after the function.
     return wrapper_func
